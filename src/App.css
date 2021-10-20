@@ -1,41 +1,37 @@
 .wrapper {
-  min-height: 100%;
+  min-height: 100vh;
   overflow: hidden;
   background-color: #e5e5e5;
   padding: 0 0 30px 0;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-}
-
 .button__add {
+  position: fixed;
+  top: 20px;
+  left: 600px;
   background-color: #222;
   border-radius: 4px;
   border-style: none;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  display: inline-block;
   font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
+  height: 44px;
   font-weight: 700;
   line-height: 1.5;
   margin: 0 auto 10px;
   max-width: none;
-  min-height: 44px;
-  min-width: 10px;
   outline: none;
   overflow: hidden;
   padding: 10px;
-  position: relative;
+  margin: 0;
   text-align: center;
   text-transform: none;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 30%;
+  width: 15%;
   transition: 0.3s ease-in;
 }
 

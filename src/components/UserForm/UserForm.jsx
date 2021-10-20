@@ -35,48 +35,52 @@ export const UserForm = ({ currentUser, formType }) => {
     rocketRef.current.value = "";
     twitterRef.current.value = "";
 
-    return formType === FORM_TYPE.Add
-      ? addUser({
-          variables: {
-            insertUsersObjects: [
-              {
+    try {
+      return formType === FORM_TYPE.Add
+        ? addUser({
+            variables: {
+              insertUsersObjects: [
+                {
+                  ...{ ...variables, id },
+                },
+              ],
+            },
+            update: (cache, data) => {
+              if (data) {
+                const cachedData = cache.readQuery({ query: GET_ALL_USERS });
+                const updatedCacheData = {
+                  users: [
+                    ...cachedData.users,
+                    data.data.insert_users.returning[0],
+                  ],
+                };
+                cache.writeQuery({
+                  query: GET_ALL_USERS,
+                  data: updatedCacheData,
+                });
+              }
+            },
+            // optimisticResponse: {
+            //   insertUsersObjects: {
+            //     ...{ ...variables, id },
+            //   },
+            // },
+          })
+        : updateUser({
+            variables: {
+              updateValues: {
                 ...{ ...variables, id },
               },
-            ],
-          },
-          update: (cache, data) => {
-            if (data) {
-              const cachedData = cache.readQuery({ query: GET_ALL_USERS });
-              const updatedCacheData = {
-                users: [
-                  ...cachedData.users,
-                  data.data.insert_users.returning[0],
-                ],
-              };
-              cache.writeQuery({
-                query: GET_ALL_USERS,
-                data: updatedCacheData,
-              });
-            }
-          },
-          // optimisticResponse: {
-          //   insertUsersObjects: {
-          //     ...{ ...variables, id },
-          //   },
-          // },
-        })
-      : updateUser({
-          variables: {
-            updateValues: {
-              ...{ ...variables, id },
-            },
-            updateUsers: {
-              id: {
-                _eq: id,
+              updateUsers: {
+                id: {
+                  _eq: id,
+                },
               },
             },
-          },
-        });
+          });
+    } catch (err) {
+      console.log(`Ooops!! Something went wrong ${err}`);
+    }
   };
 
   return (
@@ -86,36 +90,38 @@ export const UserForm = ({ currentUser, formType }) => {
           changeHandler(e);
         }}
       >
-        <input
-          className="form__input"
-          type="text"
-          placeholder="Name"
-          defaultValue={name}
-          ref={nameRef}
-        />
-        <input
-          className="form__input"
-          type="text"
-          placeholder="Rocket"
-          defaultValue={rocket}
-          ref={rocketRef}
-        />
-        <DatePicker
-          className="form__input"
-          selected={date}
-          showTimeSelect
-          dateFormat="Pp"
-          onChange={(date) => {
-            setDate(date);
-          }}
-        />
-        <input
-          className="form__input"
-          type="text"
-          placeholder="Twitter"
-          defaultValue={twitter}
-          ref={twitterRef}
-        />
+        <div className="input__wrapper">
+          <input
+            className="form__input"
+            type="text"
+            placeholder="Name"
+            defaultValue={name}
+            ref={nameRef}
+          />
+          <input
+            className="form__input"
+            type="text"
+            placeholder="Rocket"
+            defaultValue={rocket}
+            ref={rocketRef}
+          />
+          <DatePicker
+            className="form__input date"
+            selected={date}
+            showTimeSelect
+            dateFormat="Pp"
+            onChange={(date) => {
+              setDate(date);
+            }}
+          />
+          <input
+            className="form__input"
+            type="text"
+            placeholder="Twitter"
+            defaultValue={twitter}
+            ref={twitterRef}
+          />
+        </div>
         <button className="form__button" type="submit">
           {FORM_TYPE[formType]}
         </button>

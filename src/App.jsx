@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import "./App.css";
 import GetUsers from "./components/GetUsers";
-import { UserForm } from "./components/UserForm/UserForm";
+import { Modal } from "./components/Modal/Modal";
 import { ApolloClient, ApolloProvider, HttpLink, from } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { cache } from "./cache";
 import { FORM_TYPE } from "./constants";
 
-const errorLink = onError(({ graphqlErrors, networkErrors }) => {
+const errorLink = onError(({ graphqlErrors }) => {
   if (graphqlErrors) {
-    graphqlErrors.map(({ message, location, path }) => {
+    graphqlErrors.map(({ message }) => {
       return alert(`Graphql error ${message}`);
     });
   }
@@ -26,7 +26,7 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [show, setShow] = useState(false);
   const [formType, setFormType] = useState(FORM_TYPE.Add);
   const [selectedUser, setSelectedUser] = useState({
     name: "",
@@ -35,8 +35,10 @@ function App() {
     twitter: "",
   });
 
+  const changeShowModal = () => {
+    setShow(!show);
+  };
   const clickHandler = (user) => {
-    setIsFormVisible((prev) => !prev);
     setSelectedUser(user);
     setFormType(FORM_TYPE.Edit);
   };
@@ -45,23 +47,23 @@ function App() {
     <ApolloProvider client={client}>
       <div className="App">
         <div className="wrapper">
-          <div className="container">
-            <GetUsers clickHandler={clickHandler} />
-            {isFormVisible && (
-              <UserForm currentUser={selectedUser} formType={formType} />
-            )}
-            {!isFormVisible && (
-              <button
-                className="button__add"
-                onClick={() => {
-                  setIsFormVisible(!isFormVisible);
-                  setFormType(FORM_TYPE.Add);
-                }}
-              >
-                {FORM_TYPE.Add}
-              </button>
-            )}
-          </div>
+          <GetUsers
+            show={show}
+            setShow={setShow}
+            setFormType={setFormType}
+            clickHandler={clickHandler}
+            changeShowModal={changeShowModal}
+          />
+          {show && (
+            <Modal
+              currentUser={selectedUser}
+              formType={formType}
+              changeShowModal={changeShowModal}
+              show={show}
+              setShow={setShow}
+            />
+          )}
+          
         </div>
       </div>
     </ApolloProvider>

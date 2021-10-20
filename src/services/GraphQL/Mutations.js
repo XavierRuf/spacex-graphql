@@ -1,7 +1,6 @@
 import { gql } from "@apollo/client";
 import { USER_FIELDS } from "./Fragment";
 export const ADD_USER_MUTATION = gql`
-  ${USER_FIELDS}
   mutation AddUser($insertUsersObjects: [users_insert_input!]!) {
     insert_users(objects: $insertUsersObjects) {
       returning {
@@ -9,10 +8,10 @@ export const ADD_USER_MUTATION = gql`
       }
     }
   }
+  ${USER_FIELDS}
 `;
 
 export const EDIT_USERS = gql`
-  ${USER_FIELDS}
   mutation UpdateUser(
     $updateValues: users_set_input
     $updateUsers: users_bool_exp!
@@ -24,4 +23,17 @@ export const EDIT_USERS = gql`
       }
     }
   }
+  ${USER_FIELDS}
+`;
+
+export const DELETE_USERS = gql`
+  mutation DeleteUser($deleteUser: users_bool_exp!) {
+    delete_users(where: $deleteUser) {
+      returning {
+        ...UserFields
+        id
+      }
+    }
+  }
+  ${USER_FIELDS}
 `;

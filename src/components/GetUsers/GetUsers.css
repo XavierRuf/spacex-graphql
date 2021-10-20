@@ -1,8 +1,3 @@
-/* .users {
-    margin: 0 50px;
-    max-height: 80vh;
-    overflow-y: auto;
+.users__wrapp {
+    width: 30%;
 }
-.users h1 {
-    margin: 20px;
-} */

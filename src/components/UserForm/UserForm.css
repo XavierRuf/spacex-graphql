@@ -1,6 +1,14 @@
+@import 'react-datepicker/dist/react-datepicker.css';
+
+.react-datepicker-wrapper {
+    width: auto;
+}
+
+
 .form {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .form__input {
@@ -8,6 +16,10 @@
   width: 140px;
   margin: 10px;
   border-radius: 15px;
+}
+
+.input__wrapper  {
+    margin-bottom: 15px;
 }
 
 .form__button {
@@ -22,8 +34,6 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 1.5;
-  /* margin: 15px auto 10px; */
-  margin: 0 0 10px 15px;
   max-width: none;
   min-height: 44px;
   min-width: 10px;
@@ -33,10 +43,8 @@
   position: relative;
   text-align: center;
   text-transform: none;
-  user-select: none;
-  -webkit-user-select: none;
   touch-action: manipulation;
-  width: 5%;
+  width: 25%;
   transition: 0.3s ease-in;
 }
 
