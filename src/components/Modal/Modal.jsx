@@ -1,13 +1,7 @@
 import React, { useRef } from "react";
 import { UserForm } from "../UserForm/UserForm";
 import "./Modal.css";
-export const Modal = ({
-  currentUser,
-  formType,
-  changeShowModal,
-  show,
-  setShow,
-}) => {
+export const Modal = ({ currentUser, formType, changeShowModal, show }) => {
   const modalRef = useRef(null);
 
   //   const handleOutsideClick = (e) => {
