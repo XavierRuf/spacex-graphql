@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import { Header } from "./components/Header/Header";
 import GetUsers from "./components/GetUsers";
 import { Modal } from "./components/Modal/Modal";
 import { ApolloClient, ApolloProvider, HttpLink, from } from "@apollo/client";
@@ -46,6 +47,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
+        <Header />
         <div className="wrapper">
           <GetUsers
             show={show}
@@ -63,7 +65,6 @@ function App() {
               setShow={setShow}
             />
           )}
-          
         </div>
       </div>
     </ApolloProvider>

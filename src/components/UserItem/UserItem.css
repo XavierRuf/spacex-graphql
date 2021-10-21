@@ -7,19 +7,26 @@
   flex-direction: column;
   box-shadow: 0px 6px 9px 0px rgba(34, 60, 80, 0.2);
 }
+.users:first-child {
+  margin: 0 0 20px 20px;
+}
 
-.user__info {
+.users__item {
+  width: 50%;
+}
+
+.users__info {
   cursor: pointer;
   display: flex;
   justify-content: center;
 }
 
-.user__name {
+.users__name {
   font-weight: 500;
   font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
 }
 
-.user__rocket {
+.users__rocket {
   font-weight: 500;
   font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
   margin-left: 20px;

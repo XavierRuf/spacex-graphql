@@ -26,26 +26,31 @@ function GetUsers({
         <Loader />
       ) : (
         <div className="users__wrapp">
-          {data.users.map((value, idx) => {
-            return (
-              <UserItem
-                changeShowModal={changeShowModal}
-                user={value}
-                key={idx}
-                clickHandler={(value) => clickHandler(value)}
-              />
-            );
-          })}
+          <div className="users__item">
+            {data.users.map((value, idx) => {
+              return (
+                <UserItem
+                  changeShowModal={changeShowModal}
+                  user={value}
+                  key={idx}
+                  clickHandler={(value) => clickHandler(value)}
+                />
+              );
+            })}
+          </div>
+
           {!show && (
-            <button
-              className="button__add"
-              onClick={() => {
-                setShow(!show);
-                setFormType(FORM_TYPE.Add);
-              }}
-            >
-              {FORM_TYPE.Add}
-            </button>
+            <div className="users__btn">
+              <button
+                className="button__add"
+                onClick={() => {
+                  setShow(!show);
+                  setFormType(FORM_TYPE.Add);
+                }}
+              >
+                {FORM_TYPE.Add}
+              </button>
+            </div>
           )}
         </div>
       )}

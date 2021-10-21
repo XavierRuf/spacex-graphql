@@ -30,6 +30,7 @@ export const UserForm = ({ currentUser, formType }) => {
       twitter: twitterRef.current.value,
       timestamp: date,
     };
+
     //later change this code...
     nameRef.current.value = "";
     rocketRef.current.value = "";

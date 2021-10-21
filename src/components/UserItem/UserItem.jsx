@@ -28,9 +28,9 @@ export const UserItem = ({ user, clickHandler, changeShowModal }) => {
 
   return (
     <div onClick={() => clickHandler(user)} tabIndex={0} className="users">
-      <div className="user__info" onClick={changeShowModal}>
-        {name && <p className="user__name">{name}</p>}
-        <p className="user__rocket">
+      <div className="users__info" onClick={changeShowModal}>
+        {name && <p className="users__name">{name}</p>}
+        <p className="users__rocket">
           {user.rocket && <span>Rocket: {rocket}</span>}
         </p>
       </div>

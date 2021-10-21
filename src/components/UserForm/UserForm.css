@@ -1,9 +1,8 @@
-@import 'react-datepicker/dist/react-datepicker.css';
+@import "react-datepicker/dist/react-datepicker.css";
 
 .react-datepicker-wrapper {
-    width: auto;
+  width: auto;
 }
-
 
 .form {
   display: flex;
@@ -18,8 +17,8 @@
   border-radius: 15px;
 }
 
-.input__wrapper  {
-    margin-bottom: 15px;
+.input__wrapper {
+  margin-bottom: 15px;
 }
 
 .form__button {
