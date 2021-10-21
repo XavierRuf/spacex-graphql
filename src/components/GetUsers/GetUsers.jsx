@@ -38,7 +38,6 @@ function GetUsers({
               );
             })}
           </div>
-
           {!show && (
             <div className="users__btn">
               <button

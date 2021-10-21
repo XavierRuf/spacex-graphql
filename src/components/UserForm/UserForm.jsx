@@ -40,6 +40,7 @@ export const UserForm = ({ currentUser, formType }) => {
     if (errorMessage) {
       setValidateText(errorMessage);
     } else {
+      setValidateText((errorMessage = ""));
       return true;
     }
   };
