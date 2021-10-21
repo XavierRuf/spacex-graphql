@@ -27,12 +27,12 @@ function GetUsers({
       ) : (
         <div className="users__wrapp">
           <div className="users__item">
-            {data.users.map((value, idx) => {
+            {data.users.map((value) => {
               return (
                 <UserItem
                   changeShowModal={changeShowModal}
                   user={value}
-                  key={idx}
+                  key={value.id}
                   clickHandler={(value) => clickHandler(value)}
                 />
               );
