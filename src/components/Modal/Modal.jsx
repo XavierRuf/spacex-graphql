@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import { UserForm } from "../UserForm/UserForm";
 import "./Modal.css";
 export const Modal = ({ currentUser, formType, changeShowModal, show }) => {
-  const modalRef = useRef(null);
+  // const modalRef = useRef(null);
 
   //   const handleOutsideClick = (e) => {
   //     if (!e.path.includes(modalRef.current) && show) {
@@ -19,7 +19,7 @@ export const Modal = ({ currentUser, formType, changeShowModal, show }) => {
     <>
       {show && (
         <div className="modal">
-          <div ref={modalRef} className="modal__content">
+          <div className="modal__content">
             <div className="modal__header">
               <h4 className="modal__title">Change Info by User</h4>
             </div>
