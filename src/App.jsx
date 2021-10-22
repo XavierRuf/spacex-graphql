@@ -51,6 +51,7 @@ function App() {
         <div className="wrapper">
           <GetUsers
             show={show}
+            setSelectedUser={setSelectedUser}
             setShow={setShow}
             setFormType={setFormType}
             clickHandler={clickHandler}

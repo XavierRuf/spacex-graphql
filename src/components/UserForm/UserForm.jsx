@@ -13,7 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export const UserForm = ({ currentUser, formType }) => {
   const [user, setUser] = useState(currentUser);
-  const [validateText, setValidateText] = useState();
+  const [validateText, setValidateText] = useState(null);
 
   const { name, rocket, twitter, id } = user;
 
@@ -29,9 +29,9 @@ export const UserForm = ({ currentUser, formType }) => {
 
     if (name.length < 3) {
       errorMessage = "Enter the correct name";
-    } else if (!rocket.length) {
+    } else if (!rocket?.length) {
       errorMessage = "Rocket field isn't to be empty";
-    } else if (!twitter.length) {
+    } else if (!twitter?.length) {
       errorMessage = "Twitter field isn't to be empty";
     } else {
       errorMessage = "";

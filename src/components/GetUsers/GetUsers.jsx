@@ -10,16 +10,23 @@ import { GET_ALL_USERS } from "../../services/GraphQL/Queries";
 
 function GetUsers({
   clickHandler,
+  setSelectedUser,
   changeShowModal,
   show,
   setShow,
   setFormType,
 }) {
   const { loading, data, error } = useQuery(GET_ALL_USERS);
+  const clearInputUserField = {
+    name: "",
+    rocket: "",
+    twitter: "",
+  };
   if (error) {
     return console.log(`Something went wrong by ${error}`);
   }
 
+  console.log(clickHandler);
   return (
     <>
       {loading ? (
@@ -45,6 +52,7 @@ function GetUsers({
                 onClick={() => {
                   setShow(!show);
                   setFormType(FORM_TYPE.Add);
+                  setSelectedUser(clearInputUserField);
                 }}
               >
                 {FORM_TYPE.Add}
