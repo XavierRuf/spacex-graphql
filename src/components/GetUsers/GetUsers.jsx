@@ -27,7 +27,7 @@ function GetUsers({
       ) : (
         <div className="users__wrapp">
           <div className="users__item">
-            {data?.users.map((value) => {
+            {data.users?.map((value) => {
               return (
                 <UserItem
                   changeShowModal={changeShowModal}
