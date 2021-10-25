@@ -25,8 +25,6 @@ function GetUsers({
   if (error) {
     return console.log(`Something went wrong by ${error}`);
   }
-
-  console.log(clickHandler);
   return (
     <>
       {loading ? (

@@ -9,7 +9,22 @@ export const UserItem = ({ user, clickHandler, changeShowModal }) => {
   const { name, id, rocket } = user;
 
   const [deleteUser] = useMutation(DELETE_USERS, {
-    refetchQueries: [GET_ALL_USERS, "GetAllUsers"],
+    update: (cache, data) => {
+      const legacyCacheUsers = cache.readQuery({ query: GET_ALL_USERS });
+      const userData = data.data.delete_users.returning[0]?.id;
+      const deletedID = userData;
+
+      const newUsers = legacyCacheUsers.users.filter(
+        (prev) => prev.id !== deletedID
+      );
+
+      cache.writeQuery({
+        query: GET_ALL_USERS,
+        data: {
+          users: [...newUsers],
+        },
+      });
+    },
   });
 
   const handlerDeleteUser = () => {

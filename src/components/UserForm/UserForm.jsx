@@ -66,6 +66,18 @@ export const UserForm = ({ currentUser, formType }) => {
                   },
                 ],
               },
+              optimisticResponse: {
+                insert_users: {
+                  __typename: "users_mutation_response",
+                  returning: [
+                    {
+                      __typename: "users",
+                      id: "-1",
+                      ...variables,
+                    },
+                  ],
+                },
+              },
               update: (cache, data) => {
                 if (data) {
                   const cachedData = cache.readQuery({ query: GET_ALL_USERS });
