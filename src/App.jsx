@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import { Header } from "./components/Header/Header";
 import GetUsers from "./components/GetUsers";
@@ -43,31 +44,41 @@ function App() {
     setSelectedUser(user);
     setFormType(FORM_TYPE.Edit);
   };
-
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <Header />
-        <div className="wrapper">
-          <GetUsers
-            show={show}
-            setSelectedUser={setSelectedUser}
-            setShow={setShow}
-            setFormType={setFormType}
-            clickHandler={clickHandler}
-            changeShowModal={changeShowModal}
-          />
-          {show && (
-            <Modal
-              currentUser={selectedUser}
-              formType={formType}
-              changeShowModal={changeShowModal}
-              show={show}
-              setShow={setShow}
+      <Router>
+        <div className="App">
+          <Header />
+          <div className="wrapper">
+            <Route
+              path="/:id?"
+              render={({ match }) => {
+                const { id } = match.params;
+                return (
+                  <GetUsers
+                    itemID={id}
+                    show={show}
+                    setSelectedUser={setSelectedUser}
+                    setShow={setShow}
+                    setFormType={setFormType}
+                    clickHandler={clickHandler}
+                    changeShowModal={changeShowModal}
+                  />
+                );
+              }}
             />
-          )}
+            {show && (
+              <Modal
+                currentUser={selectedUser}
+                formType={formType}
+                changeShowModal={changeShowModal}
+                show={show}
+                setShow={setShow}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      </Router>
     </ApolloProvider>
   );
 }

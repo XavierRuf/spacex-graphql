@@ -2,19 +2,6 @@ import React from "react";
 import { UserForm } from "../UserForm/UserForm";
 import "./Modal.css";
 export const Modal = ({ currentUser, formType, changeShowModal, show }) => {
-  // const modalRef = useRef(null);
-
-  //   const handleOutsideClick = (e) => {
-  //     if (!e.path.includes(modalRef.current) && show) {
-  //       setShow((prev) => !prev);
-  //       console.log("hello");
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     document.body.addEventListener("click", handleOutsideClick);
-  //   }, []);
-
   return (
     <>
       {show && (

@@ -5,7 +5,8 @@ import { DELETE_USERS } from "../../services/GraphQL/Mutations";
 import { GET_ALL_USERS } from "../../services/GraphQL/Queries";
 import { FORM_TYPE } from "../../constants";
 
-export const UserItem = ({ user, clickHandler, changeShowModal }) => {
+export const UserItem = ({ user, clickHandler, changeShowModal, history, itemID }) => {
+
   const { name, id, rocket } = user;
 
   const [deleteUser] = useMutation(DELETE_USERS, {
@@ -42,11 +43,19 @@ export const UserItem = ({ user, clickHandler, changeShowModal }) => {
   };
 
   return (
-    <div onClick={() => clickHandler(user)} tabIndex={0} className="users">
+    <div
+      onClick={() => {
+        console.log('userItem',itemID)
+        history.push(`/${id}`);
+        clickHandler(user);
+      }}
+      tabIndex={0}
+      className="users"
+    >
       <div className="users__info" onClick={changeShowModal}>
         {name && <p className="users__name">{name}</p>}
         <p className="users__rocket">
-          {user.rocket && <span>Rocket: {rocket}</span>}
+          {rocket && <span>Rocket: {rocket}</span>}
         </p>
       </div>
       <button className="users__btn--delete" onClick={handlerDeleteUser}>

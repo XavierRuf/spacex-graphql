@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 //Style
 import { Loader } from "../Loader/Loader";
 import "./GetUsers.css";
@@ -15,6 +16,8 @@ function GetUsers({
   show,
   setShow,
   setFormType,
+  itemID,
+  history,
 }) {
   const { loading, data, error } = useQuery(GET_ALL_USERS);
   const clearInputUserField = {
@@ -25,6 +28,14 @@ function GetUsers({
   if (error) {
     return console.log(`Something went wrong by ${error}`);
   }
+
+  
+data && data.users.forEach((item) => {
+  if(item.id !== itemID) {
+    <h2>ERR</h2>
+  }
+})
+
   return (
     <>
       {loading ? (
@@ -34,12 +45,14 @@ function GetUsers({
           <div className="users__item">
             {data.users?.map((value) => {
               return (
-                <UserItem
-                  changeShowModal={changeShowModal}
-                  user={value}
-                  key={value.id}
-                  clickHandler={(value) => clickHandler(value)}
-                />
+                  <UserItem
+                    itemID={itemID}
+                    history={history}
+                    changeShowModal={changeShowModal}
+                    user={value}
+                    key={value.id}
+                    clickHandler={(value) => clickHandler(value)}
+                  />
               );
             })}
           </div>
@@ -63,4 +76,4 @@ function GetUsers({
   );
 }
 
-export default GetUsers;
+export default withRouter(GetUsers);
