@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
 //Queries
 import { useQuery } from "@apollo/client";
@@ -10,13 +10,12 @@ import { FORM_TYPE } from "./constants";
 import { Header } from "./components/Header/Header";
 import { Loader } from "./components/Loader/Loader";
 import GetUsers from "./components/GetUsers";
-import { Modal } from "./components/Modal/Modal";
+import { UserForm } from "./components/UserForm/UserForm";
 
 function App() {
   const { loading, data, error } = useQuery(GET_ALL_USERS);
-
-  const [show, setShow] = useState(false);
   const [formType, setFormType] = useState(FORM_TYPE.Add);
+  const [formVisible, setFormVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState({
     name: "",
     rocket: "",
@@ -24,9 +23,6 @@ function App() {
     twitter: "",
   });
 
-  const changeShowModal = () => {
-    setShow(!show);
-  };
   const clickHandler = (user) => {
     setSelectedUser(user);
     setFormType(FORM_TYPE.Edit);
@@ -38,31 +34,47 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Link to="/">
+          <Header />
+        </Link>
         <div className="wrapper">
           <Route
-            path="/:id?"
+            path="/"
+            exact
             render={() => {
               return (
                 <GetUsers
+                  formVisible={formVisible}
+                  setFormVisible={setFormVisible}
+                  formType={formType}
                   data={data}
                   clickHandler={clickHandler}
-                  changeShowModal={changeShowModal}
-                  show={show}
-                  setShow={setShow}
                   setFormType={setFormType}
                   setSelectedUser={setSelectedUser}
                 />
               );
             }}
           />
-          {show && (
-            <Modal
-              currentUser={selectedUser}
-              formType={formType}
-              changeShowModal={changeShowModal}
-              show={show}
-              setShow={setShow}
+          <Route
+            path="/:id"
+            render={({ match }) => {
+              const { id } = match.params;
+              return (
+                <UserForm
+                  itemId={id}
+                  formType={formType}
+                  currentUser={selectedUser}
+                />
+              );
+            }}
+          />
+          {formVisible && (
+            <Route
+              render={() => {
+                return (
+                  <UserForm formType={formType} currentUser={selectedUser} />
+                );
+              }}
             />
           )}
         </div>
