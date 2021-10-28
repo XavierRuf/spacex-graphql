@@ -1,7 +1,12 @@
 import React from "react";
 import { UserForm } from "../UserForm/UserForm";
 import "./Modal.css";
-export const Modal = ({ currentUser, formType, changeShowModal, show }) => {
+export const Modal = ({
+  currentUser,
+  formType,
+  changeShowModal,
+  show,
+}) => {
   return (
     <>
       {show && (
@@ -11,7 +16,10 @@ export const Modal = ({ currentUser, formType, changeShowModal, show }) => {
               <h4 className="modal__title">Change Info by User</h4>
             </div>
             <div className="modal__body">
-              <UserForm currentUser={currentUser} formType={formType} />
+              <UserForm
+                currentUser={currentUser}
+                formType={formType}
+              />
             </div>
             <div className="modal__footer footer">
               <span onClick={changeShowModal} className="footer_closeBtn">

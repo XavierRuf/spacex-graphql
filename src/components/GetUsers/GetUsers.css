@@ -40,3 +40,74 @@
 .button__add:focus {
   opacity: 0.75;
 }
+
+
+/* users */
+
+.users {
+  width: 50%;
+  border: 1px solid gray;
+  border-radius: 15px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 6px 9px 0px rgba(34, 60, 80, 0.2);
+}
+.users:first-child {
+  margin: 0 0 20px 20px;
+}
+
+.users__item {
+  width: 50%;
+}
+
+.users__info {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.users__name {
+  font-weight: 500;
+  font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+}
+
+.users__rocket {
+  font-weight: 500;
+  font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+  margin-left: 20px;
+}
+
+.users__btn--delete {
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0 auto 10px;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 30%;
+  transition: 0.3s ease-in;
+}
+
+.users__btn--delete:hover,
+.users__btn--delete:focus {
+  opacity: 0.75;
+}
