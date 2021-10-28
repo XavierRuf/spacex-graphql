@@ -1,5 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router";
+//Loader
+import { Loader } from "../Loader/Loader";
 //Style
 import "./GetUsers.css";
 import { useMutation } from "@apollo/client";
@@ -13,7 +15,6 @@ function GetUsers({
   setFormType,
   setSelectedUser,
   history,
-  formVisible,
   setFormVisible,
 }) {
   const clearInputUserField = {
@@ -22,7 +23,7 @@ function GetUsers({
     twitter: "",
   };
 
-  const [deleteUser] = useMutation(DELETE_USERS, {
+  const [deleteUser, { loading }] = useMutation(DELETE_USERS, {
     update: (cache, data) => {
       const legacyCacheUsers = cache.readQuery({ query: GET_ALL_USERS });
       const userData = data.data.delete_users.returning[0]?.id;
@@ -40,6 +41,8 @@ function GetUsers({
       });
     },
   });
+
+  if (loading) return <Loader />;
 
   return (
     <>
@@ -91,7 +94,7 @@ function GetUsers({
               history.push("/new");
             }}
           >
-            {formVisible ? "close form" : `${FORM_TYPE.Add} new user`}
+            {FORM_TYPE.Add} new user
           </button>
         </div>
       </div>

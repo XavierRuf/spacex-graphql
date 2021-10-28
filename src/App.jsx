@@ -41,9 +41,11 @@ function App() {
           <Route
             path="/"
             exact
-            render={() => {
+            render={({ match }) => {
+              const { id } = match.params;
               return (
                 <GetUsers
+                  itemID={id}
                   formVisible={formVisible}
                   setFormVisible={setFormVisible}
                   formType={formType}
@@ -57,23 +59,16 @@ function App() {
           />
           <Route
             path="/:id"
-            render={({ match }) => {
-              const { id } = match.params;
+            render={() => {
               return (
-                <UserForm
-                  itemId={id}
-                  formType={formType}
-                  currentUser={selectedUser}
-                />
+                <UserForm formType={formType} currentUser={selectedUser} />
               );
             }}
           />
           {formVisible && (
             <Route
               render={() => {
-                return (
-                  <UserForm formType={formType} currentUser={selectedUser} />
-                );
+                <UserForm formType={formType} currentUser={selectedUser} />;
               }}
             />
           )}

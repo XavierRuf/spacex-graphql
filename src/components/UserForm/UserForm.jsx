@@ -10,6 +10,7 @@ import { GET_ALL_USERS } from "../../services/GraphQL/Queries.js";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Loader } from "../Loader/Loader";
 
 export const UserForm = ({ currentUser, formType }) => {
   const [user, setUser] = useState(currentUser);
@@ -17,7 +18,7 @@ export const UserForm = ({ currentUser, formType }) => {
 
   const { name, rocket, twitter, id } = user;
 
-  const [addUser] = useMutation(ADD_USER_MUTATION);
+  const [addUser, { loading }] = useMutation(ADD_USER_MUTATION);
   const [updateUser] = useMutation(EDIT_USERS);
 
   const [date, setDate] = useState(new Date());
@@ -118,6 +119,8 @@ export const UserForm = ({ currentUser, formType }) => {
       [key]: value,
     }));
   };
+
+  if (loading) return <Loader />;
 
   return (
     <div className="form">
